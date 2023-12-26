@@ -127,7 +127,13 @@ local indent_blankline_plugin = {
   main = "ibl",
   opt = {},
   config = function()
-    require("ibl").setup({})
+    require("ibl").setup({
+      exclude = {
+        filetypes = {
+          "dashboard"
+        }
+      }
+    })
   end
 }
 
