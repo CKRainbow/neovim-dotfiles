@@ -38,6 +38,10 @@ local nvim_autopairs_plugin = {
   event = "InsertEnter",
   opts = {}
 }
+local lexima_vim_plugin = {
+  "cohama/lexima.vim",
+  event = { "InsertEnter", "CmdlineEnter" },
+}
 
 local comment_plugin = {
   "numToStr/Comment.nvim",
@@ -169,7 +173,8 @@ else
       bufferline_plugin,
       nvim_treesitter_plugin,
       "rrethy/vim-illuminate",
-      nvim_autopairs_plugin,
+      -- nvim_autopairs_plugin,
+      lexima_vim_plugin,
       comment_plugin,
       "JoosepAlviste/nvim-ts-context-commentstring",
       "mg979/vim-visual-multi",
