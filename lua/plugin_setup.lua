@@ -95,6 +95,7 @@ require("nvim-web-devicons").setup({})
 ---------------------- bufferline -------------------------
 require("bufferline").setup({
   options = {
+    mode = "buffer",
     diagnostics = "nvim_lsp",
     offests = { {
       filetype = "NvimTree",

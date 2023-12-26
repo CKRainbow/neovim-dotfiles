@@ -46,11 +46,10 @@ else
   -- bufferline 左右Tab切换
   map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
   map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
+  -- 关闭当前 buffer
+  map("n", "<leader>bc", ":bdelete %<CR>", opt)
+  map("n", "<leader>bo", ":BufferLineCloseLeft<CR>:BufferLineCloseRight<CR>", opt)
   -- disable esc
   map("i", "<esc>", "<nop>", opt)
   map("i", "jk", "<esc>", opt)
-  -- terminal related
-  map("t", "<C-[>", "<C-\\><C-n>", opt)
-  map("n", "<A-=>", ":vsp term://zsh<CR>", opt)
-  map("t", "<A-=>", "<C-\\><C-n>:bdelete! %<CR>", opt)
 end
