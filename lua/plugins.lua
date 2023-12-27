@@ -1,4 +1,4 @@
-local fn = vim.fn
+local fs = vim.fn
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -147,6 +147,12 @@ local fidget_plugin = {
   opts = {}
 }
 
+-- snippets
+local luasnip_plugin = {
+  "L3MON4D3/LuaSnip",
+  version = "v2.1",
+  build = "make install_jsregexp"
+}
 
 if vim.g.vscode then
   require("lazy").setup({
@@ -163,7 +169,7 @@ else
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       -- snippets
-      "L3MON4D3/LuaSnip",
+      luasnip_plugin,
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
       -- theme
