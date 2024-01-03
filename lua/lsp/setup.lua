@@ -1,7 +1,13 @@
-local servers = {
+local lsps = {
   "lua_ls",
   "tsserver",
   "biome",
+  "clangd"
+}
+
+local daps = {
+  "chrome",
+  "codelldb",
 }
 
 require("mason").setup({
@@ -61,7 +67,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 ---------- lsp config -------------
 require("mason-lspconfig").setup({
-  ensure_installed = servers,
+  ensure_installed = lsps,
 })
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
@@ -71,7 +77,7 @@ end
 
 local opts = {}
 
-for _, server in pairs(servers) do
+for _, server in pairs(lsps) do
   opts = {
     on_attach = require("lsp.handlers").on_attach,
     capabilities = require("lsp.handlers").capabilities,
@@ -79,7 +85,7 @@ for _, server in pairs(servers) do
 
   server = vim.split(server, "@")[1]
 
-  local require_ok, conf_opts = pcall(require, "lsp.settings." .. server)
+  local require_ok, conf_opts = pcall(require, "lsp/settings/" .. server)
   if require_ok then
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
   end
@@ -87,4 +93,4 @@ for _, server in pairs(servers) do
   lspconfig[server].setup(opts)
 end
 
-require("lsp.handlers").setup()
+require("lsp/handlers").setup()

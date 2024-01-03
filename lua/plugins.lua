@@ -174,6 +174,7 @@ else
       "rafamadriz/friendly-snippets",
       -- theme
       "rebelot/kanagawa.nvim",
+      "marko-cerovac/material.nvim",
       -- util plugins
       nvim_tree_plugin,
       bufferline_plugin,

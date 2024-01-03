@@ -23,6 +23,8 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+-- supertab config comes from
+-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 cmp.setup({
   snippet = {
     expand = function(args)

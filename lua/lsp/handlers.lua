@@ -53,6 +53,7 @@ end
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
+  local multi_keymap = vim.keymap.set
   keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -60,15 +61,27 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gH", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+
   keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
   keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
-  keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
   keymap(bufnr, "n", "z=", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
   keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
   keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
-  keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+  keymap(bufnr, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  keymap(bufnr, "i", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+
+  multi_keymap({ "i", "n", "v" }, "<F5>", "<cmd>lua require'dap'.continue()<CR>",
+    { silent = true, noremap = true, buffer = bufnr })
+  multi_keymap({ "i", "n", "v" }, "<F10>", "<cmd>lua require'dap'.step_over()<CR>",
+    { silent = true, noremap = true, buffer = bufnr })
+  multi_keymap({ "i", "n", "v" }, "<F11>", "<cmd>lua require'dap'.step_into()<CR>",
+    { silent = true, noremap = true, buffer = bufnr })
+  multi_keymap({ "i", "n", "v" }, "<F12>", "<cmd>lua require'dap'.step_over()<CR>",
+    { silent = true, noremap = true, buffer = bufnr })
+  multi_keymap({ "i", "n", "v" }, "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+    { silent = true, noremap = true, buffer = bufnr })
 end
 
 M.on_attach = function(client, bufnr)
