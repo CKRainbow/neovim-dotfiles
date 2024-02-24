@@ -22,9 +22,11 @@ M.setup = function()
   end
 
   local config = {
-    virtual_text = true, -- disable virtual text
+    virtual_text = {
+      virt_text_pos = "right_align", -- position of virtual text
+    },
     signs = {
-      active = signs,    -- show signs
+      active = signs, -- show signs
     },
     update_in_insert = true,
     underline = true,

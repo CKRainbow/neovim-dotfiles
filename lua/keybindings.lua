@@ -3,7 +3,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = vim.api.nvim_set_keymap
+local mapset = vim.keymap.set
 local opt = { noremap = true, silent = true }
+local expr_opt = { noremap = true, silent = true, expr = true }
 
 -- map('模式', '按键', '映射后按键', opt)
 map("", "H", "^", opt)
@@ -14,7 +16,6 @@ if vim.g.vscode then
   map("", "<Space>", "<Nop>", opt)
 
   map("n", "<Leader><Leader>", "<Cmd>lua require('vscode-neovim').call('workbench.action.quickOpen')<CR>", opt)
-  map("n", "u", "<Cmd>lua require('vscode-neovim').call('undo')<CR>", opt)
 
   map("n", "zO", "<Cmd>call VSCodeNotify('editor.unfoldAll')<CR>", opt)
   map("n", "zC", "<Cmd>call VSCodeNotify('editor.foldAll')<CR>", opt)
@@ -52,4 +53,22 @@ else
   -- disable esc
   map("i", "<esc>", "<nop>", opt)
   map("i", "jk", "<esc>", opt)
+
+  -- codeium
+  -- vim.g.codeium_disable_bindings = 1
+  -- mapset("i", "<M-Enter>", function()
+  --   return vim.fn['codeium#Accept']()
+  -- end, expr_opt)
+  -- mapset("i", "<Tab>", function()
+  --   return vim.fn['codeium#CycleCompletions'](1)
+  -- end, expr_opt)
+  -- mapset("i", "<S-Tab>", function()
+  --   return vim.fn['codeium#CycleCompletions'](-1)
+  -- end, expr_opt)
+  -- mapset("i", "<C-x>", function()
+  --   return vim.fn['codeium#Clear']()
+  -- end, expr_opt)
+  -- mapset("i", "<C-e>", function()
+  --   return vim.fn['codeium#Complete']()
+  -- end, expr_opt)
 end

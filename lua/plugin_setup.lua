@@ -1,18 +1,37 @@
 ------------------------- hop -----------------------------
 
-local hop = require('hop')
-vim.keymap.set('', 'f', function()
-  hop.hint_char1({ current_line_only = true })
-end, { remap = true })
-vim.keymap.set('', 'F', function()
-  hop.hint_char2({})
-end, { remap = true })
-vim.keymap.set('', 't', function()
-  hop.hint_patterns({})
-end, { remap = true })
-vim.keymap.set('', 'T', function()
-  hop.hint_lines_skip_whitespace({})
-end, { remap = true })
+-- local hop = require('hop')
+-- vim.keymap.set('', 'f', function()
+--   hop.hint_char1({ current_line_only = true })
+-- end, { remap = true })
+-- vim.keymap.set('', 'F', function()
+--   hop.hint_char2({})
+-- end, { remap = true })
+-- vim.keymap.set('', 't', function()
+--   hop.hint_patterns({})
+-- end, { remap = true })
+-- vim.keymap.set('', 'T', function()
+--   hop.hint_lines_skip_whitespace({})
+-- end, { remap = true })
+
+------------------------- leap -----------------------------
+-- local leap = require('leap')
+-- vim.keymap.set({ 'n', 'x', 'o' }, 'f', '<Plug>(leap-forward)')
+-- vim.keymap.set({ 'n', 'x', 'o' }, 'F', '<Plug>(leap-backward)')
+-- vim.keymap.set({ 'n', 'x', 'o' }, '<leader>wf', '<Plug>(leap-from-window)')
+-- vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+--
+-- require('leap.user').set_repeat_keys('<cr>', '<bs>', {
+--   -- False by default. If set to true, the keys will work like the
+--   -- native semicolon/comma, i.e., forward/backward is understood in
+--   -- relation to the last motion.
+--   relative_directions = true,
+--   -- By default, all modes are included.
+--   modes = { 'n', 'x', 'o' },
+-- })
+
+------------------------- flash -----------------------------
+local flash = require('flash')
 
 if vim.g.vscode then
   return
@@ -130,7 +149,15 @@ require 'nvim-treesitter.configs'.setup {
       node_incremental = '<CR>',
       node_decremental = '<BS>',
       scope_incremental = '<TAB>',
-    }
+    },
+    -- disable when in cmdline mode
+    is_supported = function()
+      local mode = vim.api.nvim_get_mode().mode
+      if mode == "c" then
+        return false
+      end
+      return true
+    end
   },
   -- 启用基于Treesitter的代码格式化(=) . NOTE: This is an experimental feature.
   indent = {
@@ -146,6 +173,11 @@ vim.wo.foldlevel = 99
 
 ---------------------------- Autocomplete and Snippet ----------------------
 require("nvim-cmp")
+
+------------------------- codeium -------------------------
+require("codeium").setup({
+  -- detect_proxy = true,
+})
 
 -------------------------- Comment ---------------------------------------
 require("Comment").setup({
@@ -171,7 +203,7 @@ require("material").setup({
     "dashboard",
     -- "eyeliner",
     "fidget",
-    -- "flash",
+    "flash",
     -- "gitsigns",
     -- "harpoon",
     -- "hop",

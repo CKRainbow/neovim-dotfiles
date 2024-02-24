@@ -35,8 +35,8 @@ cmp.setup({
 
   mapping = {
 
-    ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-    ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+    ["<C-e>"] = cmp.mapping.complete(), -- show completion suggestions
+    ["<C-x>"] = cmp.mapping.abort(),    -- close completion window
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     -- ... Your other mappings ...
 
@@ -73,8 +73,11 @@ cmp.setup({
     { name = "luasnip" },  -- snippets
     { name = "buffer" },   -- text within the current buffer
     { name = "path" },     -- file system paths
+    { name = "codeium" },
   }),
   -- ... Your other configuration ...
+  formatting = {
+  }
 })
 -- cmp.setup({
 --   mapping = cmp.mapping.preset.insert({

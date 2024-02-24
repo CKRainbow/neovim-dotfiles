@@ -71,6 +71,23 @@ local hop_plugin = {
   end
 }
 
+local leap_plugin = {
+  "ggandor/leap.nvim",
+}
+
+local flash_plugin = {
+  "folke/flash.nvim",
+  event = "VeryLazy",
+  opts = {},
+  keys = {
+    { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+    { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+    { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+    { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+  }
+}
+
 local nvim_telescope_plugin = {
   "nvim-telescope/telescope.nvim",
   version = "0.1.5",
@@ -154,10 +171,22 @@ local luasnip_plugin = {
   build = "make install_jsregexp"
 }
 
+local codeium_plugin = {
+  "Exafunction/codeium.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "hrsh7th/nvim-cmp",
+  },
+  event = "BufEnter"
+}
+
 if vim.g.vscode then
   require("lazy").setup({
+    nvim_treesitter_plugin,
     nvim_surround_plugin,
-    hop_plugin,
+    -- hop_plugin,
+    -- leap_plugin,
+    flash_plugin,
   })
 else
   require("lazy").setup(
@@ -186,7 +215,9 @@ else
       "JoosepAlviste/nvim-ts-context-commentstring",
       "mg979/vim-visual-multi",
       nvim_surround_plugin,
-      hop_plugin,
+      -- hop_plugin,
+      -- leap_plugin,
+      flash_plugin,
       nvim_telescope_plugin,
       which_key_plugin,
       dashboard_plugin,
@@ -196,6 +227,7 @@ else
       fidget_plugin,
       vim_fugitive_plugin,
       nvim_treesitter_context_plugin,
+      codeium_plugin,
       -- lsp
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",

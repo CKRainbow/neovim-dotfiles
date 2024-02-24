@@ -22,6 +22,12 @@ vim.opt.listchars = {
 -- lesser update time
 vim.o.updatetime = 500
 
+-- <C-x> <C-a>时的格式，只使用二进制 十六进制 字母
+vim.o.nrformats = "bin,hex,alpha"
+
+-- history
+vim.o.history = 200
+
 -- 自动更新配置文件
 vim.api.nvim_create_augroup("VIMRC", { clear = true })
 
