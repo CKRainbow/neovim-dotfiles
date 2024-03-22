@@ -38,6 +38,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 if vim.g.vscode then
+  -- yank 直接应用于系统剪贴板
+  vim.opt.clipboard:append("unnamedplus")
   return
 end
 

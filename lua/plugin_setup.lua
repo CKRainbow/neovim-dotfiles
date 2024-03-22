@@ -32,10 +32,15 @@
 
 ------------------------- flash -----------------------------
 local flash = require('flash')
+flash.toggle(false)
 
 if vim.g.vscode then
   return
 end
+
+---------------------------- Autocomplete and Snippet ----------------------
+require("nvim-cmp")
+
 --------------------- lualine ----------------------------
 require("treesitter-context").setup({
   enable = true,
@@ -171,20 +176,18 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
 vim.wo.foldlevel = 99
 
----------------------------- Autocomplete and Snippet ----------------------
-require("nvim-cmp")
-
-------------------------- codeium -------------------------
-require("codeium").setup({
-  -- detect_proxy = true,
-})
-
 -------------------------- Comment ---------------------------------------
 require("Comment").setup({
   prehook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
 })
 ---------------------------- Language Server Protocal ----------------------
 require("lsp.setup")
+
+------------------------- codeium -------------------------
+require("codeium").setup({
+  detect_proxy = false,
+})
+
 ---------------------------- Color Scheme ----------------------------------
 local colorscheme = "material"
 vim.g.material_style = "darker"

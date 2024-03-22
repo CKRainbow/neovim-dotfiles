@@ -15,7 +15,8 @@ end
 -- load VSCode-like snippets from plugins (e.g., friendly-snippets)
 require("luasnip/loaders/from_vscode").lazy_load()
 
-vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.completeopt = "menu,menuone,noselect,preview"
+
 
 local has_words_before = function()
   unpack = unpack or table.unpack
@@ -69,11 +70,11 @@ cmp.setup({
 
   -- sources for autocompletion
   sources = cmp.config.sources({
+    { name = "codeium" },
     { name = "nvim_lsp" }, -- LSP
     { name = "luasnip" },  -- snippets
     { name = "buffer" },   -- text within the current buffer
     { name = "path" },     -- file system paths
-    { name = "codeium" },
   }),
   -- ... Your other configuration ...
   formatting = {
@@ -88,7 +89,7 @@ cmp.setup({
 
 
 -- Use buffer source for `/`.
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   sources = {
     { name = 'buffer' }
   }

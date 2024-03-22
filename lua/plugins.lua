@@ -80,11 +80,10 @@ local flash_plugin = {
   event = "VeryLazy",
   opts = {},
   keys = {
-    { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-    { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-    { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-    { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+    { "r", mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+    { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
   }
 }
 
@@ -174,10 +173,9 @@ local luasnip_plugin = {
 local codeium_plugin = {
   "Exafunction/codeium.nvim",
   dependencies = {
-    "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
-  },
-  event = "BufEnter"
+    "nvim-lua/plenary.nvim",
+  }
 }
 
 if vim.g.vscode then
@@ -192,7 +190,14 @@ else
   require("lazy").setup(
     {
       -- autocomplete
-      "hrsh7th/nvim-cmp",
+      {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        dependencies = {
+          "hrsh7th/cmp-buffer",
+          "hrsh7th/cmp-nvim-lsp",
+        }
+      },
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
